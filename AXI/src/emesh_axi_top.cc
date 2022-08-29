@@ -104,7 +104,7 @@ EmeshAxiTop::EmeshAxiTop()
   }
 
   { // B_SET
-    auto instr = wmodel.NewInstr("B_Master_Wait");
+    auto instr = wmodel.NewInstr("B_SET");
 
     instr.SetDecode( (tx_bwait == 1) & (bready == 1) & (axi_aresetn_w == 1 ));
 

@@ -1,0 +1,61 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+
+        // AW states
+        "tx_awaddr" : "m1.s_w.tx_awaddr",
+        "tx_awlen" : "m1.s_w.tx_awlen",
+        "tx_awsize" : "m1.s_w.tx_awsize", 
+        "tx_awburst" : "m1.s_w.tx_awburst",
+
+        // Overall State
+        "tx_wactive" : "m1.s_w.tx_wactive",
+        "tx_wlast" : "m1.s_w.s_axi_wlast",
+        "tx_bwait" : "m1.s_w.tx_bwait"
+    },
+
+    "value-holder":{
+    },
+
+    "verilog-inline-monitors" : {
+    },
+
+    "interface mapping": {
+       
+        "clk" :    "**CLOCK**",
+        "resetn" : "**NRESET**",
+
+        "awaddr_in"  : "**KEEP**",
+        "awlen_in"   : "**KEEP**",
+        "awsize_in"  : "**KEEP**",
+        "awburst_in" : "**KEEP**",
+        "awvalid_in" : "**KEEP**",
+
+        "wdata_in"   : "**KEEP**",
+        "wstrb_in"   : "**KEEP**",
+        "wvalid_in"  : "**KEEP**",
+        "wready_in"  : "**KEEP**",
+
+        "bready_in"  : "**KEEP**"
+    },
+  
+    "mapping control":[
+        "m1.awaddr_in == m0.awaddr",
+        "m1.awlen_in == m0.awlen",
+        "m1.awsize_in == m0.awsize",
+        "m1.awburst_in == m0.awburst",
+        "m1.awvalid_in == m0.write_addr_valid",
+        "m1.wvalid_in == m0.write_valid",
+        "m1.wready_in == m0.write_ready",
+        "m1.bready_in == m0.bready"
+    ],
+  
+    "assumptions" : [
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+}

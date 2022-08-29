@@ -1,0 +1,28 @@
+{
+  "instructions": [
+    {
+      "instruction" : "W_Master_Reset",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "AW_SET",
+      "start condition" : ["$decode$", "m1.m_w.m_axi_awvalid == 0"],
+      "ready bound" : 2
+    },
+
+    {
+      "instruction" : "W_SENT",
+      "start condition" : ["$decode$", "m1.m_w.m_axi_wvalid == 0"],
+      "ready bound" : 2
+    },
+
+    {
+      "instruction" : "B_SET",
+      "ready bound" : 3
+    }
+  ],
+  
+  "global invariants": []
+
+}

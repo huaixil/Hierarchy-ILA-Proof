@@ -1,7 +1,14 @@
 #include <emesh_axi_master.h>
 #include <emesh_axi_slave.h>
 #include <emesh_axi_top.h>
+
 #include <ilang/vtarget-out/vtarget_gen.h>
+#include <ilang/ilang++.h>
+#include <ilang/util/log.h>
+#include <iostream>
+using namespace std;
+
+using namespace ilang;
 
 /// the function to generate configuration
 VerilogVerificationTargetGenerator::vtg_config_t SetConfiguration();
@@ -11,15 +18,9 @@ VerilogVerificationTargetGenerator::vtg_config_t HandleArguments(int argc, char 
 int main(int argc, char **argv) {
   // extract the configurations
   std::vector<std::string> design_files = {
-    "emaxi.v",
-    "emesh2packet.v",
-    "em_se.v",
-    "esaxi.v",
-    "oh_dsync.v",
-    "oh_fifo_sync.v",
-    "oh_memory_dp.v",
-    "oh_memory_ram.v",
-    "packet2emesh.v"
+    "emaxi_w.v",
+    "esaxi_w.v",
+    "top_w.v"
   };
 
   auto vtg_cfg = SetConfiguration();
@@ -29,6 +30,36 @@ int main(int argc, char **argv) {
   EmeshAxiMasterBridge emaxi;
   EmeshAxiSlaveBridge esaxi;
   EmeshAxiTop etop;
+
+  VerilogGeneratorBase::VlgGenConfig vlg_cfg;
+  vlg_cfg.pass_node_name = true;
+  vtg_cfg.ForceInstCheckReset = true;
+  vtg_cfg.MemAbsReadAbstraction = true;
+
+  std::string RootPath    = "..";
+  std::string VerilogPath = RootPath    + "/verification/";
+  std::string IncludePath = VerilogPath + "include/";
+  std::string RefrelPath  = RootPath    + "/refinement/";
+  std::string OutputPath  = RootPath    + "/verification/";
+
+  std::vector<std::string> path_to_design_files;
+  for(auto && f : design_files)
+    path_to_design_files.push_back( VerilogPath + f );
+  
+
+  VerilogVerificationTargetGenerator vg(
+      {IncludePath},                                         // one include path
+      path_to_design_files,                                  // designs
+      "Write_Channel",                               // top_module_name
+      RefrelPath + "ref-rel-var-map-w.json",                // variable mapping
+      RefrelPath + "ref-rel-inst-cond-w.json",              // conditions of start/ready
+      OutputPath,                                            // output path
+      etop.wmodel.get(),                                           // model
+      VerilogVerificationTargetGenerator::backend_selector::JASPERGOLD, // backend: JASPERGOLD
+      vtg_cfg,  // target generator configuration
+      vlg_cfg); // verilog generator configuration
+
+  vg.GenerateTargets();
 
   
   std::string verilog_file_name = "esaxi_w.v";
