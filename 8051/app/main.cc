@@ -7,6 +7,7 @@
 #include <ilang/target-json/interface.h>
 #include <ilang/util/log.h>
 #include <iostream>
+#include <simple/lib.h>
 using namespace std;
 
 using namespace ilang;
@@ -14,6 +15,11 @@ using namespace ilang;
 /// the function to generate configuration
 VerilogVerificationTargetGenerator::vtg_config_t SetConfiguration();
 VerilogVerificationTargetGenerator::vtg_config_t HandleArguments(int argc, char **argv);
+void verify_top_ilacomp(
+  InstrLvlAbsPtr model, 
+  VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
+  const std::vector<std::string> & design_files
+   );
 
 /// Build the model
 int main(int argc, char **argv) {
@@ -57,6 +63,14 @@ int main(int argc, char **argv) {
   mem_interface.model.ExportToVerilog(fw_verilog);
   fw_verilog.close();
 
+  verilog_file_name = "oc8051_ila.v";
+  fw_verilog.open(verilog_file_name);
+  VerilogGenerator vgen(VerilogGenerator::VlgGenConfig(
+      true)); // overwrite default configuration : memory is external
+  vgen.ExportIla(proc_ila);
+  vgen.DumpToFile(fw_verilog);
+  fw_verilog.close();
+
   std::vector<std::string> design_files = {
     "datapath_ila.v",
     "decoder_ila.v",
@@ -64,11 +78,22 @@ int main(int argc, char **argv) {
     "8051_ila_comp.v"
   };
 
+  std::vector<ExprPtr> tmp_iram_elements;
+  ModifyIramInterface(proc_ila, tmp_iram_elements);
+  AddIromInputPort(proc_ila);
+  AddXramOutPort(proc_ila);
+  for (int i = 0; i < 255; i++) {
+    Model8051RemapMemInterface(proc_ila, tmp_iram_elements, i);
+    // cout << "instr " << i << " has done." << endl; 
+  }
+
+  verify_top_ilacomp(proc_ila, vtg_cfg, design_files);
+
   return 0;
 }
 
 void verify_top_ilacomp(
-  Ila& model, 
+  InstrLvlAbsPtr model, 
   VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
   const std::vector<std::string> & design_files
    ) {
@@ -90,11 +115,11 @@ void verify_top_ilacomp(
   VerilogVerificationTargetGenerator vg(
       {IncludePath},                                         // one include path
       path_to_design_files,                                  // designs
-      "oc8051_top",                               // top_module_name
-      RefrelPath + "ref-rel-var-map-up.json",                // variable mapping
-      RefrelPath + "ref-rel-inst-cond-up.json",              // conditions of start/ready
+      "ila_comp_8051",                               // top_module_name
+      RefrelPath + "ref-rel-var-map.json",                // variable mapping
+      RefrelPath + "ref-rel-inst-cond.json",              // conditions of start/ready
       OutputPath,                                            // output path
-      model.get(),                                           // model
+      model,                                           // model
       VerilogVerificationTargetGenerator::backend_selector::JASPERGOLD, // backend: JASPERGOLD
       vtg_cfg,  // target generator configuration
       vlg_cfg); // verilog generator configuration

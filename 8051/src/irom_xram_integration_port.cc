@@ -4,6 +4,7 @@
 void MEMORY_INTERFACE_THREE_PORTS::irom_port_input_state(Ila& model) {
   auto idat_i = model.NewBvInput("idat_i", 8);  
   auto iack_i = model.NewBoolInput("iack_i");
+  
   auto istb_t = model.NewBoolState("istb_t");
   auto iadr_t = model.NewBvState("iadr_t", 16);
   auto idat_ir = model.NewBvState("idat_ir", 8);

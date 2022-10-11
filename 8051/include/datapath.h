@@ -11,7 +11,7 @@ public:
   DATAPATH();
   Ila model;
 
-  const int kRAM_MAX = 255;
+  const int kRAM_MAX = 15;
   const int kIRAM_ADDR_SIZE = 8;
 
 };

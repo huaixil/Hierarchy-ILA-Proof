@@ -1,0 +1,20 @@
+{
+  "instructions":
+  [
+    {
+      "instruction"     : "I.36",
+      "start condition" : ["$decode$", "m1.pc_change == 1"],
+      "ready bound" : 5
+      // "ready signal"    : "m1.pc_change == 1"
+    },
+    {
+      "instruction"    : "I.240",
+      "start condition" : ["$decode$", "m1.pc_change == 1"],
+      "ready signal" : "m1.mem_interface.dwe_o && m1.mem_interface.dstb_o"
+    }
+  ],
+
+  "global invariants" : []
+}
+
+// "(~((m1.rd == 1) && (m1.irom_out_of_rst == 1) && (m1.mem_interface.pc_wr_r == 0) && (m1.mem_interface.pc_wr_r2 == 0)) || (m1.mem_interface.pc == m1.mem_interface.pc_ref))"

@@ -55,6 +55,7 @@ add_library(${PROC8051_TARGET}
   src/irom_xram_integration_port.cc
   src/pc_port.cc
   src/util.cc
+  src/lib.cc
 )
 
 target_include_directories(${PROC8051_TARGET} PRIVATE include)
