@@ -48,7 +48,6 @@
     "eq"   : "**KEEP**",
     "irom_out_of_rst"   : "**KEEP**",
     "op_in"   : "**KEEP**",
-    "wait_data"   : "**KEEP**",
     "dack_i": "**KEEP**"
   },
   "mapping control" : [
