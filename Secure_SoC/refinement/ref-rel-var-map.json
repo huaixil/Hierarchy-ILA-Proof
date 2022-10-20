@@ -1,0 +1,63 @@
+{
+  "models" : { "ILA" : "m0", "VERILOG" : "m1"},
+  "state mapping" : {
+    "ACC" : 
+    [["__START__ & (m1.oc8051_top_1.oc8051_decoder1.wr_sfr == 2)", 
+      "m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.data2_in"],
+    ["__START__ & ((m1.oc8051_top_1.oc8051_decoder1.wr_sfr == 1) | (m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr && !m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_bit && (m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_addr == 8'he0)))", 
+      "m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.data_in"],
+    ["__START__ & ((m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr & m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_bit & (m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_addr[7:3]== 5'b11100)))", 
+      "m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.acc"],
+    ["__START__ & ((!(m1.oc8051_top_1.oc8051_decoder1.wr_sfr == 2)) && (!((m1.oc8051_top_1.oc8051_decoder1.wr_sfr == 1) | (m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr && !m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_bit && (m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_addr == 8'he0)))) & (!(m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr & m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_bit & (m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.wr_addr[7:3]== 5'b11100))))", 
+    "m1.oc8051_top_1.oc8051_sfr1.oc8051_acc1.data_out"],
+    ["__IEND__", "m1.oc8051_top_1.acc"]
+      ], 
+    "DPH" : [["((~(m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_sfr == 3)) & (~((m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.addr == 8'h83) & (m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr) & (!m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_bit))))", "m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.data_hi"],
+    ["(m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_sfr == 3)", "m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.data2_in"],
+    ["(m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.addr == 8'h83) & (m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr) & (!m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_bit)", "m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.data_in"]
+      ],
+    "DPL" : [["((~(m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_sfr == 3)) & (~((m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.addr == 8'h82) & (m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr) & (!m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_bit))))", "m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.data_lo"],
+    ["(m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_sfr == 3)", "m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.data_in"],
+    ["(m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.addr == 8'h82) & (m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr) & (!m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.wr_bit)", "m1.oc8051_top_1.oc8051_sfr1.oc8051_dptr1.data_in"]
+      ],
+    "aes_address"        : "m1.oc8051_xiommu1.aes_top_i.aes_reg_opaddr_i.reg_out",
+    "aes_length"         : "m1.oc8051_xiommu1.aes_top_i.aes_reg_oplen_i.reg_out",
+    "aes_key"            : "m1.oc8051_xiommu1.aes_top_i.aes_reg_key0_i.reg_out",
+    "aes_counter"        : "m1.oc8051_xiommu1.aes_top_i.aes_reg_ctr_i.reg_out",
+    "aes_status"         : [["__START__", "#aes_state#"], 
+                            ["__IEND__", "m1.oc8051_xiommu1.aes_top_i.aes_reg_state"]]
+  },
+
+  "value-holder":{
+    "aes_state" :{
+        "cond": "m1.write == 1",
+        "val" : "m1.oc8051_xiommu1.aes_top_i.aes_reg_state",
+        "width": "auto"
+    }
+  },
+
+  "interface mapping" : {
+    "rst"  : "**RESET**",
+    "clk"  : "**CLOCK**"
+  },
+
+  "mapping control" : [
+    // _out"m1.oc8051_top_1.ea_in == 1",
+    "m1.oc8051_top_1.wbd_ack_i == m1.oc8051_top_1.wbd_stb_o",
+    // "m1.int0 == 0",
+    // "m1.int1 == 0",
+    // op input
+    "m1.oc8051_top_1.op1 == m0.pc_in",
+    // "m1.oc8051_top_1.op2 == m1.oc8051_top_1.op2",
+    // "m1.oc8051_top_1.op3 == m1.oc8051_top_1.op3",
+    // "!(m1.oc8051_top_1.pc_change == 0) || m1..oc8051_top_1.op1 == 0",
+
+    // "(~__START__) || (((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 0)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[7:0] == m1.oc8051_top_1.op1)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 1)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[15:8] == m1.oc8051_top_1.op1)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 2)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[23:16] == m1.oc8051_top_1.op1)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 3)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[31:24] == m1.oc8051_top_1.op1)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 4)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[7:0] == m1.oc8051_top_1.op1)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos > 4)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[15:8] == m1.oc8051_top_1.op1)))",
+    // "(~__START__) || (((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 0)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[15:8] == m1.oc8051_top_1.op2)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 1)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[23:16] == m1.oc8051_top_1.op2)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 2)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[31:24] == m1.oc8051_top_1.op2)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 3)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[7:0] == m1.oc8051_top_1.op2)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 4)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[15:8] == m1.oc8051_top_1.op2)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos > 4)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[23:16] == m1.oc8051_top_1.op2)))",
+    // "(~__START__) || (((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 0)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[23:16] == m1.oc8051_top_1.op3)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 1)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_old[31:24] == m1.oc8051_top_1.op3)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 2)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[7:0] == m1.oc8051_top_1.op3)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 3)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[15:8] == m1.oc8051_top_1.op3)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos == 4)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[23:16] == m1.oc8051_top_1.op3)) && ((~(m1.oc8051_top_1.oc8051_memory_interface1.op_pos > 4)) || (m1.oc8051_top_1.oc8051_memory_interface1.idat_cur[31:24] == m1.oc8051_top_1.op3)))",
+    "m1.oc8051_top_1.p == 0",
+    "(m1.oc8051_top_1.oc8051_memory_interface1.op_pos < 6)"
+    //     "(~(m1.mem_interface.dack_ir == 1)) || (m1.decoder.state != 0)",
+    //     "(~(m1.mem_interface.cdone == 1)) || (m1.decoder.state != 0)"
+  ]
+}

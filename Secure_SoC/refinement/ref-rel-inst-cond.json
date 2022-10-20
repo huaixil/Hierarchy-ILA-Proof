@@ -1,0 +1,29 @@
+{
+  "instructions":
+  [
+    {
+      "instruction"     : "WRITE",
+      "start condition" : ["$decode$", "m1.oc8051_top_1.pc_change == 1"],
+      "ready bound"     : 6,
+      "ready signal"    : "m1.oc8051_top_1.pc_change == 1"
+    },
+
+    {
+      "instruction"     : "START_ENCRYPT",
+      "start condition" : ["$decode$", "m1.oc8051_top_1.pc_change == 1"],
+      "ready bound"     : 6,
+      "ready signal"    : "m1.oc8051_top_1.pc_change == 1"
+    },
+
+    {
+      "instruction"     : "READ",
+      "start condition" : ["$decode$", "m1.oc8051_top_1.pc_change == 1"],
+      "ready bound"     : 5
+    }
+  ],
+
+  "global invariants" : 
+  [
+
+  ]
+}
