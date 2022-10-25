@@ -84,7 +84,7 @@ AES::AES()
                     (cmddata == 1));
     // if it is idle, we will start, if it is not idle, there is no guarantee
     // what it may become
-    instr.SetUpdate(status, Ite(is_status_idle, BvConst(1, 2), unknown(2)()));
+    instr.SetUpdate(status, Ite(is_status_idle, BvConst(1, 2), status));
 
     AddChild(instr);
     // You can have a tighter guarantee there:
@@ -225,7 +225,7 @@ AES::AES()
     instr.SetUpdate(counter,
                     Ite(is_status_idle,
                         slice_update(counter, cmdaddr, cmddata, AES_CNT, 16, 8),
-                        unknown(128)()));
+                        counter));
 
     // if you want a more explicit sepcification
     // you can replace the last line with

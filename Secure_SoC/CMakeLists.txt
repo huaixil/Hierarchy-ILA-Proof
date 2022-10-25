@@ -54,6 +54,7 @@ add_library(${SECURE_SOC_TARGET}
   src/helper.cc
   src/lib.cc
   src/aes_ila.cc
+  src/aes_child.cc
   src/soc_inputs.cc
   src/soc_states.cc
   src/soc_instrs.cc

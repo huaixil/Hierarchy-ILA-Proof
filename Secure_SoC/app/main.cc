@@ -17,8 +17,11 @@ VerilogVerificationTargetGenerator::vtg_config_t HandleArguments(int argc, char 
 void verify_top_ila_vs_rtl(
   Ila& model, 
   VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
-  const std::vector<std::string> & design_files
-   );
+  const std::vector<std::string> & design_files);
+void verify_top_ila_vs_comp(
+  Ila& model, 
+  VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
+  const std::vector<std::string> & design_files);
 
 /// Build the model
 int main(int argc, char **argv) {
@@ -42,14 +45,13 @@ int main(int argc, char **argv) {
     // cout << "instr " << i << " has done." << endl; 
   }
 
-  // std::cout << "oc8051 states:" << std::endl;
-  // for (auto i = 0; i < proc_ila->state_num(); i++) {
-  //   ILA_INFO << proc_ila->state(i);
-  // }
-  // std::cout << "oc8051 inputs:" << std::endl;
-  // for (auto i = 0; i < proc_ila->input_num(); i++) {
-  //   ILA_INFO << proc_ila->input(i);
-  // }
+  // Top level model for AES
+  AES aes_ila;
+  std::cout << "aes loaded" << std::endl;
+
+  // Top level model for SoC
+  auto secure_soc_ila = GetSoCIla("secure_soc");
+  std::cout << "secure_soc loaded" << std::endl;
 
   std::string verilog_file_name = "oc8051_ila.v";
   std::ofstream fw_verilog(verilog_file_name);
@@ -59,7 +61,12 @@ int main(int argc, char **argv) {
   vgen.DumpToFile(fw_verilog);
   fw_verilog.close();
 
-  std::vector<std::string> design_files = {
+  verilog_file_name = "aes_ila.v";
+  fw_verilog.open(verilog_file_name);
+  aes_ila.model.ExportToVerilog(fw_verilog);
+  fw_verilog.close();
+
+  std::vector<std::string> design_files_rtl = {
     "soc_8051.v",
     "oc8051_gm_top.v",
     "oc8051_memarbiter.v",
@@ -72,10 +79,15 @@ int main(int argc, char **argv) {
     "aes_round.v",
     "aes_128.v"
   };
+  
+  std::vector<std::string> design_files_comp = {
+    "secure_comp.v",
+    "oc8051_ila.v",
+    "aes_ila.v"
+  };
 
-  auto secure_soc_ila = GetSoCIla("secure_soc");
-
-  verify_top_ila_vs_rtl(secure_soc_ila, vtg_cfg, design_files);
+  verify_top_ila_vs_rtl(secure_soc_ila, vtg_cfg, design_files_rtl);
+  verify_top_ila_vs_comp(secure_soc_ila, vtg_cfg, design_files_comp);
 
   return 0;
 }
@@ -84,7 +96,7 @@ void verify_top_ila_vs_rtl(
   Ila& model, 
   VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
   const std::vector<std::string> & design_files
-   ) {
+) {
   VerilogGeneratorBase::VlgGenConfig vlg_cfg;
   vlg_cfg.pass_node_name = true;
   vtg_cfg.ForceInstCheckReset = true;
@@ -106,6 +118,40 @@ void verify_top_ila_vs_rtl(
       "soc_8051",                               // top_module_name
       RefrelPath + "ref-rel-var-map.json",                // variable mapping
       RefrelPath + "ref-rel-inst-cond.json",              // conditions of start/ready
+      OutputPath,                                            // output path
+      model.get(),                                           // model
+      VerilogVerificationTargetGenerator::backend_selector::JASPERGOLD, // backend: JASPERGOLD
+      vtg_cfg,  // target generator configuration
+      vlg_cfg); // verilog generator configuration
+
+  vg.GenerateTargets();
+}
+
+void verify_top_ila_vs_comp(
+  Ila& model, 
+  VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
+  const std::vector<std::string> & design_files) {
+  VerilogGeneratorBase::VlgGenConfig vlg_cfg;
+  vlg_cfg.pass_node_name = true;
+  vtg_cfg.ForceInstCheckReset = true;
+
+  std::string RootPath    = "..";
+  std::string VerilogPath = RootPath    + "/verilog/composition/";
+  std::string IncludePath = VerilogPath + "include/";
+  std::string RefrelPath  = RootPath    + "/refinement/";
+  std::string OutputPath  = RootPath    + "/verification/comp";
+
+  std::vector<std::string> path_to_design_files;
+  for(auto && f : design_files)
+    path_to_design_files.push_back( VerilogPath + f );
+  
+
+  VerilogVerificationTargetGenerator vg(
+      {IncludePath},                                         // one include path
+      path_to_design_files,                                  // designs
+      "soc_comp",                               // top_module_name
+      RefrelPath + "ref-rel-var-map-comp.json",                // variable mapping
+      RefrelPath + "ref-rel-inst-cond-comp.json",              // conditions of start/ready
       OutputPath,                                            // output path
       model.get(),                                           // model
       VerilogVerificationTargetGenerator::backend_selector::JASPERGOLD, // backend: JASPERGOLD

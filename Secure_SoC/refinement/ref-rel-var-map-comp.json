@@ -1,0 +1,23 @@
+{
+  "models" : { "ILA" : "m0", "VERILOG" : "m1"},
+  "state mapping" : {
+    "ACC" : "m1.oc8051.ACC", 
+    "DPH" : "m1.oc8051.DPH",
+    "DPL" : "m1.oc8051.DPL",
+    "aes_address"        : "m1.aes.aes_address",
+    "aes_length"         : "m1.aes.aes_length",
+    "aes_key"            : "m1.aes.aes_key",
+    "aes_counter"        : "m1.aes.aes_counter",
+    "aes_status"         : "m1.aes.aes_status"
+  },
+
+  "interface mapping" : {
+    "rst"  : "**RESET**",
+    "clk"  : "**CLOCK**"
+  },
+
+  "mapping control" : [
+    // _out"m1.oc8051_top_1.ea_in == 1",
+    "m1.pc_in == m0.pc_in"
+  ]
+}

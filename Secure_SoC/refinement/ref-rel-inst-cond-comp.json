@@ -1,0 +1,21 @@
+{
+  "instructions":
+  [
+    {
+      "instruction"     : "WRITE",
+      "start condition" : ["$decode$", "m1.aes.cmd == 2'b00"],
+      "ready bound"     : 2
+    },
+
+    {
+      "instruction"     : "START_ENCRYPT",
+      "start condition" : ["$decode$", "m1.aes.cmd == 2'b00"],
+      "ready bound"     : 2
+    }
+  ],
+
+  "global invariants" : 
+  [
+
+  ]
+}
