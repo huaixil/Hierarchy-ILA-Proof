@@ -1,0 +1,17 @@
+{
+  "instructions": [
+    {
+      "instruction" : "PE0_CONFIG_CLUSTER_TABLE_FIRST",
+      "ready bound" : 1
+    },
+
+    {
+      "instruction" : "PE0_top_transfer",
+      "ready signal" : "#transfer_commit#",
+      "start condition" : ["$decode$", "m1.pecore_inst.PECore_PECoreRun_inst.fsm_output[1] == 1 & m1.pecore_inst.act_port_val == 0"]
+    }
+  ],
+  
+  "global invariants": []
+
+}
