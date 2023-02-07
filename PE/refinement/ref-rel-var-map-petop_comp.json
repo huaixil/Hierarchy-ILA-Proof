@@ -1,0 +1,277 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+        // PE_Manager_0
+        "cluster_table_first_Entry_0": "m1.pecore_inst.cluster_table_first_Entry_0",
+        "cluster_table_first_Entry_1": "m1.pecore_inst.cluster_table_first_Entry_1",
+        "cluster_table_first_Entry_2": "m1.pecore_inst.cluster_table_first_Entry_2", 
+        "cluster_table_first_Entry_3": "m1.pecore_inst.cluster_table_first_Entry_3",
+        "cluster_table_first_Entry_4": "m1.pecore_inst.cluster_table_first_Entry_4",
+        "cluster_table_first_Entry_5": "m1.pecore_inst.cluster_table_first_Entry_5",
+        "cluster_table_first_Entry_6": "m1.pecore_inst.cluster_table_first_Entry_6",
+        "cluster_table_first_Entry_7": "m1.pecore_inst.cluster_table_first_Entry_7",
+        "cluster_table_first_Entry_8": "m1.pecore_inst.cluster_table_first_Entry_8",
+        "cluster_table_first_Entry_9": "m1.pecore_inst.cluster_table_first_Entry_9",
+        "cluster_table_first_Entry_10": "m1.pecore_inst.cluster_table_first_Entry_10",
+        "cluster_table_first_Entry_11": "m1.pecore_inst.cluster_table_first_Entry_11",
+        "cluster_table_first_Entry_12": "m1.pecore_inst.cluster_table_first_Entry_12",
+        "cluster_table_first_Entry_13": "m1.pecore_inst.cluster_table_first_Entry_13",
+        "cluster_table_first_Entry_14": "m1.pecore_inst.cluster_table_first_Entry_14",
+        "cluster_table_first_Entry_15": "m1.pecore_inst.cluster_table_first_Entry_15",
+
+        "pe0_mem_mngr_first_zero_active":       "m1.pecore_inst.pe0_mem_mngr_first_zero_active",
+        "pe0_mem_mngr_first_adpfloat_bias_w":   "m1.pecore_inst.pe0_mem_mngr_first_adpfloat_bias_w",
+        "pe0_mem_mngr_first_adpfloat_bias_b":   "m1.pecore_inst.pe0_mem_mngr_first_adpfloat_bias_b",
+        "pe0_mem_mngr_first_adpfloat_bias_i":   "m1.pecore_inst.pe0_mem_mngr_first_adpfloat_bias_i",
+        "pe0_mem_mngr_first_num_input":         "m1.pecore_inst.pe0_mem_mngr_first_num_input",
+        "pe0_mem_mngr_first_base_weight":       "m1.pecore_inst.pe0_mem_mngr_first_base_weight",
+        "pe0_mem_mngr_first_base_bias":         "m1.pecore_inst.pe0_mem_mngr_first_base_bias",
+        "pe0_mem_mngr_first_base_input":        "m1.pecore_inst.pe0_mem_mngr_first_base_input",
+
+        // PE_Manager_1
+        "cluster_table_second_Entry_0": "m1.pecore_inst.cluster_table_second_Entry_0",
+        "cluster_table_second_Entry_1": "m1.pecore_inst.cluster_table_second_Entry_1",
+        "cluster_table_second_Entry_2": "m1.pecore_inst.cluster_table_second_Entry_2", 
+        "cluster_table_second_Entry_3": "m1.pecore_inst.cluster_table_second_Entry_3",
+        "cluster_table_second_Entry_4": "m1.pecore_inst.cluster_table_second_Entry_4",
+        "cluster_table_second_Entry_5": "m1.pecore_inst.cluster_table_second_Entry_5",
+        "cluster_table_second_Entry_6": "m1.pecore_inst.cluster_table_second_Entry_6",
+        "cluster_table_second_Entry_7": "m1.pecore_inst.cluster_table_second_Entry_7",
+        "cluster_table_second_Entry_8": "m1.pecore_inst.cluster_table_second_Entry_8",
+        "cluster_table_second_Entry_9": "m1.pecore_inst.cluster_table_second_Entry_9",
+        "cluster_table_second_Entry_10": "m1.pecore_inst.cluster_table_second_Entry_10",
+        "cluster_table_second_Entry_11": "m1.pecore_inst.cluster_table_second_Entry_11",
+        "cluster_table_second_Entry_12": "m1.pecore_inst.cluster_table_second_Entry_12",
+        "cluster_table_second_Entry_13": "m1.pecore_inst.cluster_table_second_Entry_13",
+        "cluster_table_second_Entry_14": "m1.pecore_inst.cluster_table_second_Entry_14",
+        "cluster_table_second_Entry_15": "m1.pecore_inst.cluster_table_second_Entry_15",
+
+        "pe0_mem_mngr_second_zero_active":       "m1.pecore_inst.pe0_mem_mngr_second_zero_active",
+        "pe0_mem_mngr_second_adpfloat_bias_w":   "m1.pecore_inst.pe0_mem_mngr_second_adpfloat_bias_w",
+        "pe0_mem_mngr_second_adpfloat_bias_b":   "m1.pecore_inst.pe0_mem_mngr_second_adpfloat_bias_b",
+        "pe0_mem_mngr_second_adpfloat_bias_i":   "m1.pecore_inst.pe0_mem_mngr_second_adpfloat_bias_i",
+        "pe0_mem_mngr_second_num_input":         "m1.pecore_inst.pe0_mem_mngr_second_num_input",
+        "pe0_mem_mngr_second_base_weight":       "m1.pecore_inst.pe0_mem_mngr_second_base_weight",
+        "pe0_mem_mngr_second_base_bias":         "m1.pecore_inst.pe0_mem_mngr_second_base_bias",
+        "pe0_mem_mngr_second_base_input":        "m1.pecore_inst.pe0_mem_mngr_second_base_input",
+
+        // PE_Config
+        "pe0_rnn_layer_sizing_is_valid"     :   "m1.pecore_inst.pe0_rnn_layer_sizing_is_valid",
+        "pe0_rnn_layer_sizing_is_zero_first":   "m1.pecore_inst.pe0_rnn_layer_sizing_is_zero_first",
+        "pe0_rnn_layer_sizing_is_cluster":      "m1.pecore_inst.pe0_rnn_layer_sizing_is_cluster",
+        "pe0_rnn_layer_sizing_is_bias":         "m1.pecore_inst.pe0_rnn_layer_sizing_is_bias",
+        "pe0_rnn_layer_sizing_num_manager":     "m1.pecore_inst.pe0_rnn_layer_sizing_num_manager",
+        "pe0_rnn_layer_sizing_num_output":      "m1.pecore_inst.pe0_rnn_layer_sizing_num_output",
+        "pe0_core_manager_cntr":                "m1.pecore_inst.pe0_core_manager_cntr",
+        "pe0_core_input_counter" :              "m1.pecore_inst.pe0_core_input_counter",
+        "pe0_core_output_counter":              "m1.pecore_inst.pe0_core_output_counter",
+
+        // Internal State
+        "pe0_core_state" :    "m1.pecore_inst.pe0_core_state",
+        "pe0_core_is_start" : "m1.pecore_inst.pe0_core_is_start",
+
+        "PE0_core_accum_vector_0" :"m1.pecore_inst.PE0_core_accum_vector_0",
+        "PE0_core_accum_vector_1" :"m1.pecore_inst.PE0_core_accum_vector_1",
+        "PE0_core_accum_vector_2" :"m1.pecore_inst.PE0_core_accum_vector_2",
+        "PE0_core_accum_vector_3" :"m1.pecore_inst.PE0_core_accum_vector_3",
+        "PE0_core_accum_vector_4" :"m1.pecore_inst.PE0_core_accum_vector_4",
+        "PE0_core_accum_vector_5" :"m1.pecore_inst.PE0_core_accum_vector_5",
+        "PE0_core_accum_vector_6" :"m1.pecore_inst.PE0_core_accum_vector_6",
+        "PE0_core_accum_vector_7" :"m1.pecore_inst.PE0_core_accum_vector_7",
+        "PE0_core_accum_vector_8" :"m1.pecore_inst.PE0_core_accum_vector_8",
+        "PE0_core_accum_vector_9" :"m1.pecore_inst.PE0_core_accum_vector_9",
+        "PE0_core_accum_vector_10" :"m1.pecore_inst.PE0_core_accum_vector_10",
+        "PE0_core_accum_vector_11" :"m1.pecore_inst.PE0_core_accum_vector_11",
+        "PE0_core_accum_vector_12" :"m1.pecore_inst.PE0_core_accum_vector_12",
+        "PE0_core_accum_vector_13" :"m1.pecore_inst.PE0_core_accum_vector_13",
+        "PE0_core_accum_vector_14" :"m1.pecore_inst.PE0_core_accum_vector_14",
+        "PE0_core_accum_vector_15" :"m1.pecore_inst.PE0_core_accum_vector_15",
+
+        // // Output
+        // "PE0_core_act_vector_0"  : "act_port_msg[19:0]",
+        // "PE0_core_act_vector_1"  : "act_port_msg[39:20]",
+        // "PE0_core_act_vector_2"  : "act_port_msg[59:40]",
+        // "PE0_core_act_vector_3"  : "act_port_msg[79:60]",
+        // "PE0_core_act_vector_4"  : "act_port_msg[99:80]",
+        // "PE0_core_act_vector_5"  : "act_port_msg[119:100]",
+        // "PE0_core_act_vector_6"  : "act_port_msg[139:120]",
+        // "PE0_core_act_vector_7"  : "act_port_msg[159:140]",
+        // "PE0_core_act_vector_8"  : "act_port_msg[179:160]",
+        // "PE0_core_act_vector_9"  : "act_port_msg[199:180]",
+        // "PE0_core_act_vector_10"  : "act_port_msg[219:200]",
+        // "PE0_core_act_vector_11"  : "act_port_msg[239:220]",
+        // "PE0_core_act_vector_12"  : "act_port_msg[259:240]",
+        // "PE0_core_act_vector_13"  : "act_port_msg[279:260]",
+        // "PE0_core_act_vector_14"  : "act_port_msg[299:280]",
+        // "PE0_core_act_vector_15"  : "act_port_msg[319:300]",
+
+        // "pe0_act_reg_port_valid" : "act_port_val",
+        "rva_in_ready" : "rva_in_rdy",
+        "pe_start_ready" : "start_rdy",
+        "input_port_ready" : "input_port_rdy",
+
+        "pe0_core_weight_buffer" : "**MEM**weight_buffer",
+        "pe0_core_input_buffer" : "**MEM**input_buffer",
+
+        // PE Act
+        // Act_Config
+        "pe0_act_mngr_is_valid"     :   "m1.act_inst.pe0_act_mngr_is_valid",
+        "pe0_act_mngr_is_zero_first":   "m1.act_inst.pe0_act_mngr_is_zero_first",
+        "pe0_act_mngr_adpfloat_bias":   "m1.act_inst.pe0_act_mngr_adpfloat_bias",
+        "pe0_act_mngr_num_inst":        "m1.act_inst.pe0_act_mngr_num_inst",
+        "pe0_act_mngr_num_output":      "m1.act_inst.pe0_act_mngr_num_output",
+        "pe0_act_mngr_buffer_addr_base":"m1.act_inst.pe0_act_mngr_buffer_addr_base",
+        "pe0_act_mngr_output_addr_base":"m1.act_inst.pe0_act_mngr_output_addr_base",
+        "pe0_act_instruction_counter":  "m1.act_inst.pe0_act_instruction_counter",
+        "pe0_act_output_counter"     :  "m1.act_inst.pe0_act_output_counter",
+
+        "act_vector_0_15_Inst_0" :  "m1.act_inst.act_vector_0_15_Inst_0",
+        "act_vector_0_15_Inst_1" :  "m1.act_inst.act_vector_0_15_Inst_1",
+        "act_vector_0_15_Inst_2" :  "m1.act_inst.act_vector_0_15_Inst_2",
+        "act_vector_0_15_Inst_3" :  "m1.act_inst.act_vector_0_15_Inst_3",
+        "act_vector_0_15_Inst_4" :  "m1.act_inst.act_vector_0_15_Inst_4",
+        "act_vector_0_15_Inst_5" :  "m1.act_inst.act_vector_0_15_Inst_5",
+        "act_vector_0_15_Inst_6" :  "m1.act_inst.act_vector_0_15_Inst_6",
+        "act_vector_0_15_Inst_7" :  "m1.act_inst.act_vector_0_15_Inst_7",
+        "act_vector_0_15_Inst_8" :  "m1.act_inst.act_vector_0_15_Inst_8",
+        "act_vector_0_15_Inst_9" :  "m1.act_inst.act_vector_0_15_Inst_9",
+        "act_vector_0_15_Inst_10" : "m1.act_inst.act_vector_0_15_Inst_10",
+        "act_vector_0_15_Inst_11" : "m1.act_inst.act_vector_0_15_Inst_11",
+        "act_vector_0_15_Inst_12" : "m1.act_inst.act_vector_0_15_Inst_12",
+        "act_vector_0_15_Inst_13" : "m1.act_inst.act_vector_0_15_Inst_13",
+        "act_vector_0_15_Inst_14" : "m1.act_inst.act_vector_0_15_Inst_14",
+        "act_vector_0_15_Inst_15" : "m1.act_inst.act_vector_0_15_Inst_15",
+
+        "act_vector_16_31_Inst_0" :  "m1.act_inst.act_vector_16_31_Inst_0",
+        "act_vector_16_31_Inst_1" :  "m1.act_inst.act_vector_16_31_Inst_1",
+        "act_vector_16_31_Inst_2" :  "m1.act_inst.act_vector_16_31_Inst_2",
+        "act_vector_16_31_Inst_3" :  "m1.act_inst.act_vector_16_31_Inst_3",
+        "act_vector_16_31_Inst_4" :  "m1.act_inst.act_vector_16_31_Inst_4",
+        "act_vector_16_31_Inst_5" :  "m1.act_inst.act_vector_16_31_Inst_5",
+        "act_vector_16_31_Inst_6" :  "m1.act_inst.act_vector_16_31_Inst_6",
+        "act_vector_16_31_Inst_7" :  "m1.act_inst.act_vector_16_31_Inst_7",
+        "act_vector_16_31_Inst_8" :  "m1.act_inst.act_vector_16_31_Inst_8",
+        "act_vector_16_31_Inst_9" :  "m1.act_inst.act_vector_16_31_Inst_9",
+        "act_vector_16_31_Inst_10" : "m1.act_inst.act_vector_16_31_Inst_10",
+        "act_vector_16_31_Inst_11" : "m1.act_inst.act_vector_16_31_Inst_11",
+        "act_vector_16_31_Inst_12" : "m1.act_inst.act_vector_16_31_Inst_12",
+        "act_vector_16_31_Inst_13" : "m1.act_inst.act_vector_16_31_Inst_13",
+        "act_vector_16_31_Inst_14" : "m1.act_inst.act_vector_16_31_Inst_14",
+        "act_vector_16_31_Inst_15" : "m1.act_inst.act_vector_16_31_Inst_15",
+
+        // Internal State
+        "pe0_act_state" : "m1.act_inst.pe0_act_state",
+        "pe0_act_is_start_reg": "m1.act_inst.pe0_act_is_start_reg", 
+        "pe0_act_buffer" : "**MEM**act_buffer",
+
+
+        // Register File
+        "PE0_act_reg_temp_0" :"m1.act_inst.PE0_act_reg_temp_0",
+        "PE0_act_reg_temp_1" :"m1.act_inst.PE0_act_reg_temp_1",
+        "PE0_act_reg_temp_2" :"m1.act_inst.PE0_act_reg_temp_2",
+        "PE0_act_reg_temp_3" :"m1.act_inst.PE0_act_reg_temp_3",
+        "PE0_act_reg_temp_4" :"m1.act_inst.PE0_act_reg_temp_4",
+        "PE0_act_reg_temp_5" :"m1.act_inst.PE0_act_reg_temp_5",
+        "PE0_act_reg_temp_6" :"m1.act_inst.PE0_act_reg_temp_6",
+        "PE0_act_reg_temp_7" :"m1.act_inst.PE0_act_reg_temp_7",
+        "PE0_act_reg_temp_8" :"m1.act_inst.PE0_act_reg_temp_8",
+        "PE0_act_reg_temp_9" :"m1.act_inst.PE0_act_reg_temp_9",
+        "PE0_act_reg_temp_10" :"m1.act_inst.PE0_act_reg_temp_10",
+        "PE0_act_reg_temp_11" :"m1.act_inst.PE0_act_reg_temp_11",
+        "PE0_act_reg_temp_12" :"m1.act_inst.PE0_act_reg_temp_12",
+        "PE0_act_reg_temp_13" :"m1.act_inst.PE0_act_reg_temp_13",
+        "PE0_act_reg_temp_14" :"m1.act_inst.PE0_act_reg_temp_14",
+        "PE0_act_reg_temp_15" :"m1.act_inst.PE0_act_reg_temp_15",
+        "pe0_act_regs_0" : "**MEM**act_regs0",
+        "pe0_act_regs_1" : "**MEM**act_regs1",
+        "pe0_act_regs_2" : "**MEM**act_regs2",
+        "pe0_act_regs_3" : "**MEM**act_regs3",
+
+        "output_port_data" : "m1.output_port_msg[127:0]",
+        "output_port_addr" : "m1.output_port_msg[137:130]",
+        "output_port_valid": "output_port_val",
+
+        "done": "done_msg",
+        "done_valid": "done_val"
+    },
+
+    "value-holder":{
+    },
+
+    "verilog-inline-monitors" : {
+        "input_record": {
+            "verilog": [
+                "always @(posedge clk) begin",
+                "   if(rst) transfer_commit <= 0;",
+                "   else if (m1.act_port_rdy == 1 & m1.act_port_val == 1) transfer_commit <= 1'b1;",
+                "   else transfer_commit <= 1'b0;",
+                "end"
+            ],
+            "defs" : [
+                ["transfer_commit", 1, "reg"]
+            ],
+            "refs" : [
+                "m1.act_port_rdy",
+                "m1.act_port_val"
+            ]
+        }
+    },
+
+    "interface mapping": {
+       
+        "clk" : "**CLOCK**",
+        "rst" : "**RESET**",
+
+        "start_val": "pe_start_valid",
+        "start_rdy": "**SO**",
+        "start_msg" : "pe_start",
+
+        "done_val" : "**SO**", 
+        "done_rdy" : "done_ready",
+        "done_msg" : "**SO**",
+
+        "input_port_val": "input_port_valid",
+        "input_port_rdy" : "**SO**",
+        "input_port_msg": "**KEEP**",
+
+        "rva_in_val"  : "rva_in_valid",
+        "rva_in_rdy"  : "**SO**",
+        "rva_in_msg"  : "**KEEP**",
+        
+        "rva_out_val" : "**SO**",
+        "rva_out_rdy" : "**KEEP**",
+        "rva_out_msg" : "**SO**",
+
+        "output_port_val": "**SO**",
+        "output_port_rdy" : "output_port_ready",
+        "output_port_msg": "**SO**"
+    },
+  
+    "mapping control":[
+    ],
+
+    "annotation": {
+    },
+  
+    "assumptions" : [
+        // Need to Change manager_num to 2
+        "m1.pecore_inst.pe0_rnn_layer_sizing_num_manager == 2",
+        "m1.pecore_inst.pe0_rnn_layer_sizing_num_output >= 1",
+        // "m1.pecore_inst.rva_out_rdy == 1",
+        "m1.pecore_inst.pe0_mem_mngr_first_num_input >= 1 & m1.pecore_inst.pe0_mem_mngr_second_num_input >= 1",
+        // verified invariants 1s
+        // "m1.pecore_inst.state != 0 |-> (m1.pecore_inst.pe_config_manager_counter != 0 || m1.pecore_inst.PECore_PECoreRun_inst.pe_config_input_counter_sva <= (m1.pecore_inst.PECore_PECoreRun_inst.pe_manager_num_input_0_sva - 1))",
+        // "m1.pecore_inst.state != 0 |-> (m1.pecore_inst.pe_config_manager_counter != 1 || m1.pecore_inst.PECore_PECoreRun_inst.pe_config_input_counter_sva <= (m1.pecore_inst.PECore_PECoreRun_inst.pe_manager_num_input_1_sva - 1))",
+        "m1.pecore_inst.pe0_rnn_layer_sizing_num_output - 1 >= m1.pecore_inst.pe0_core_output_counter",
+        // reset assumptions
+        "m1.act_inst.pe0_act_is_start_reg == 1 |-> m1.act_inst.rva_in_ready == 0",
+        "m1.pecore_inst.pe0_core_is_start == 1 |-> m1.pecore_inst.rva_in_ready == 0",
+        "m1.pecore_inst.pe0_core_is_start == 1 |-> m1.act_inst.pe0_act_is_start_reg == 1"
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+}
