@@ -44,7 +44,11 @@ void verify_peact(Ila& model,
   VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
   const std::vector<std::string> & design_files); 
 
-void verify_petop(Ila& model, 
+void verify_petop_flat(Ila& model, 
+  VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
+  const std::vector<std::string> & design_files); 
+
+void verify_petop_hierarchy(Ila& model, 
   VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
   const std::vector<std::string> & design_files); 
 
@@ -52,8 +56,9 @@ int main(int argc, char* argv[]) {
   SetToStdErr(1);
 
   cout << "start";
+  // *************** PE Core ***************** //
   // get the ILA model
-  // auto pe_core = flex::GetPECoreIla("pe_core", 0);
+  auto pe_core = flex::GetPECoreIla("pe_core", 0);
 
   // ILA_INFO << "#input: " << pe_core.input_num();
   // ILA_INFO << "#state: " << pe_core.state_num();
@@ -77,7 +82,8 @@ int main(int argc, char* argv[]) {
 
   // verify_pecore(pe_core, vtg_cfg, pecore_design_files);
 
-  // auto pe_act = flex::GetPEActIla("pe_act", 0);
+  // *************** PE Act ***************** //
+  auto pe_act = flex::GetPEActIla("pe_act", 0);
 
   // ILA_INFO << "#input: " << pe_act.input_num();
   // ILA_INFO << "#state: " << pe_act.state_num();
@@ -102,6 +108,7 @@ int main(int argc, char* argv[]) {
 
   // verify_peact(pe_act, vtg_cfg, peact_design_files);
 
+  // *************** PE Top Flat ***************** //
   auto pe_top = flex::GetPETopIla("pe_top", 0);
 
   ILA_INFO << "#input: " << pe_top.input_num();
@@ -127,7 +134,27 @@ int main(int argc, char* argv[]) {
   };
   auto vtg_cfg = SetConfiguration();
 
-  verify_petop(pe_top, vtg_cfg, petop_design_files);
+  //verify_petop_flat(pe_top, vtg_cfg, petop_design_files);
+
+  // *************** PE Top Hierarchy ***************** //
+  std::string verilog_file_name = "pecore_ila.v";
+  std::ofstream fw_verilog(verilog_file_name);
+  pe_core.ExportToVerilog(fw_verilog);
+  fw_verilog.close();
+
+  verilog_file_name = "peact_ila.v";
+  fw_verilog.open(verilog_file_name);
+  pe_act.ExportToVerilog(fw_verilog);
+  fw_verilog.close();
+
+  petop_design_files = {
+    "PE_top_comp_ila.v",
+    "pecore_ila.v",
+    "peact_ila.v"
+  };
+  vtg_cfg = SetConfiguration();
+
+  verify_petop_hierarchy(pe_top, vtg_cfg, petop_design_files);
 
   return 0;
 }
@@ -204,7 +231,7 @@ void verify_peact(
   vg.GenerateTargets();
 }
 
-void verify_petop(
+void verify_petop_flat(
   Ila& model, 
   VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
   const std::vector<std::string> & design_files
@@ -231,6 +258,42 @@ void verify_petop(
       "PEModule_rtl",                               // top_module_name
       RefrelPath + "ref-rel-var-map-petop.json",                // variable mapping
       RefrelPath + "ref-rel-inst-cond-petop.json",              // conditions of start/ready
+      OutputPath,                                            // output path
+      model.get(),                                           // model
+      VerilogVerificationTargetGenerator::backend_selector::JASPERGOLD, // backend: JASPERGOLD
+      vtg_cfg,  // target generator configuration
+      vlg_cfg); // verilog generator configuration
+
+  vg.GenerateTargets();
+}
+
+void verify_petop_hierarchy(
+  Ila& model, 
+  VerilogVerificationTargetGenerator::vtg_config_t vtg_cfg,
+  const std::vector<std::string> & design_files
+   ) {
+  VerilogGeneratorBase::VlgGenConfig vlg_cfg;
+  vlg_cfg.pass_node_name = true;
+  vtg_cfg.ForceInstCheckReset = true;
+  vtg_cfg.MemAbsReadAbstraction = true;
+
+  std::string RootPath    = "..";
+  std::string VerilogPath = RootPath    + "/verilog/";
+  std::string IncludePath = VerilogPath + "include/";
+  std::string RefrelPath  = RootPath    + "/refinement/";
+  std::string OutputPath  = RootPath    + "/verification/hierarchy/";
+
+  std::vector<std::string> path_to_design_files;
+  for(auto && f : design_files)
+    path_to_design_files.push_back( VerilogPath + f );
+  
+
+  VerilogVerificationTargetGenerator vg(
+      {IncludePath},                                         // one include path
+      path_to_design_files,                                  // designs
+      "PEModule_rtl",                               // top_module_name
+      RefrelPath + "ref-rel-var-map-petop_comp.json",                // variable mapping
+      RefrelPath + "ref-rel-inst-cond-petop_comp.json",              // conditions of start/ready
       OutputPath,                                            // output path
       model.get(),                                           // model
       VerilogVerificationTargetGenerator::backend_selector::JASPERGOLD, // backend: JASPERGOLD
