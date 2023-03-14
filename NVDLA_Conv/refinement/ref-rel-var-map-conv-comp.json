@@ -1,0 +1,61 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+
+        //Config States
+        "csc_s_producer" : "m1.csc.csc_s_producer",
+        "csc_s_consumer" : "m1.csc.csc_s_consumer",
+
+        "group0_csc_d_op_en_trigger" : "m1.csc.group0_csc_d_op_en_trigger", 
+        "group1_csc_d_op_en_trigger" : "m1.csc.group1_csc_d_op_en_trigger",
+        "group0_csc_d_data_bank" : "m1.csc.group0_csc_d_data_bank",
+        "group0_csc_d_weight_bank" : "m1.csc.group0_csc_d_weight_bank",
+        "group1_csc_d_data_bank" : "m1.csc.group1_csc_d_data_bank",
+        "group1_csc_d_weight_bank" : "m1.csc.group1_csc_d_weight_bank",
+
+        // Output
+        "csb_rdy" : "m1.csc.csb_rdy",
+        "sc2buf_rdy" : null,
+        "accu2sdp_valid": "m1.cacc2sdp_valid",
+        "accu2sdp_data": null,
+        
+        // Internal States
+        "csc_state": "m1.csc.csc_state",
+        "last_weight_bank" : "m1.csc.last_weight_bank",
+        "last_data_bank": "m1.csc.last_data_bank"
+    },
+
+    "value-holder":{
+    },
+
+    "verilog-inline-monitors" : {
+    },
+
+    "interface mapping": {
+       
+        "nvdla_core_clk" : "**CLOCK**",
+        "nvdla_core_rst" : "**RESET**",
+
+        "weight_i_valid"  : "buf2sc_wt_vld",
+        "data_i_valid"  :   "buf2sc_dl_vld",
+        "cacc2sdp_valid"  : "**SO**",
+        "sdp2cacc_ready"  : "sdp2accu_ready"
+    },
+  
+    "mapping control":[
+    ],
+  
+    "assumptions" : [
+        "m1.cmac.data_ready_o == 1'b1",
+        "m1.cacc.ready_a_o == 1'b1",
+        "m1.cacc.ready_b_o == 1'b1",
+        "m0.last_channel_finished == 1'b0"
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+
+}

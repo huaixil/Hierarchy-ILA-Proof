@@ -1,0 +1,82 @@
+{
+    "models": { "ILA":"m0" , "VERILOG": "m1" },
+  
+    "state mapping": {
+
+        //Config States
+        "s_producer" : "m1.csc.u_regfile.reg2dp_producer",
+        "s_consumer" : "m1.csc.u_regfile.dp2reg_consumer",
+
+        "group0_csc_d_op_en_trigger" : "m1.csc.u_regfile.reg2dp_d0_op_en", 
+        "group1_csc_d_op_en_trigger" : "m1.csc.u_regfile.reg2dp_d1_op_en",
+        "group0_csc_d_data_bank" : "m1.csc.u_regfile.reg2dp_d0_data_bank",
+        "group0_csc_d_weight_bank" : "m1.csc.u_regfile.reg2dp_d0_weight_bank",
+        "group1_csc_d_data_bank" : "m1.csc.u_regfile.reg2dp_d1_data_bank",
+        "group1_csc_d_weight_bank" : "m1.csc.u_regfile.reg2dp_d1_weight_bank",
+
+        // Output
+        "csb_rdy" : "m1.csb2csc_req_prdy",
+        "sc2buf_rdy" : "m1.csc.u_sg.credit_ready",
+
+        // Internal States
+        "csc_state": [["__START__", "#sc_state_original#"],["__IEND__", "#sc_state_update#"]],
+        "last_weight_bank" : "m1.u_sg.last_weight_bank",
+        "last_data_bank": "m1.u_sg.last_data_bank"
+
+    },
+
+    "value-holder":{
+        "sc_state_original" :{
+            "cond": "__START__",
+            "val" : "m1.csc.u_sg.cur_state",
+            "width": 2
+          },
+
+        "sc_state_update" :{
+            "cond": "m1.csc.u_sg.cur_state == sc_state_original & m1.csc.u_sg.cur_state != m1.csc.u_sg.nxt_state",
+            "val" : "m1.csc.u_sg.nxt_state",
+            "width": 2
+          }
+    },
+
+    "verilog-inline-monitors" : {
+    },
+
+    "interface mapping": {
+       
+        "nvdla_core_clk" : "**CLOCK**",
+        "nvdla_core_rstn" : "**NRESET**",
+
+        "csb2csc_req_pvld"  : "**KEEP**",
+        "csb2csc_req_prdy"  : "**SO**",
+        "csb2csc_req_pd"  : "**KEEP**",
+        
+        "sc2mac_dat_a_pvld" : "**SO**",
+        "sc2mac_dat_b_pvld" : "**SO**",
+        "sc2mac_wt_a_pvld" : "**SO**",
+        "sc2mac_wt_b_pvld" : "**SO**"
+    },
+  
+    "mapping control":[
+        "m1.csc.u_regfile.req_pd[54:0] == {m0.csb_write, m0.csb_data, m0.csb_addr}",
+        "m1.csc.u_regfile.req_pvld == m0.csb_vld",
+        
+        "m0.sg2dl_vld == m1.csc.sg2dl_pvld",
+        "m0.sg2wt_vld == m1.csc.sg2wl_pvld"
+    ],
+  
+    "assumptions" : [
+        // weight data assumption
+        // "m1.csc.sg2wl_pvld |=>  m1.csc.u_wl.stripe_length == 9",
+        // feature data assumption
+        "csc.u_wl.is_stripe_end |-> csc.sg2dl_pvld",
+        // "m1.csc.sg2dl_pvld |-> dl_stripe_length > 2",
+        "m1.csc.u_dl.is_batch_end == 1"
+    ],
+
+    "composition checks" : [
+        
+    ]
+  
+
+}
